@@ -3,199 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Мои Программы</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <title>Скачать MOE.m3u</title>
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f5f5f5;
-      margin: 0; padding: 0;
-    }
-    h1 {
-      text-align: center;
-      font-size: 1.8em;
-      margin: 20px 0;
-      color: #111;
-    }
-    .program {
-      background-color: white;
-      border-radius: 12px;
-      margin: 15px;
-      padding: 20px;
-      position: relative;
-    }
-    .program:nth-child(2) { box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3); }
-    .program:nth-child(3) { box-shadow: 0 4px 12px rgba(0, 128, 0, 0.3); }
-    .program:nth-child(4) { box-shadow: 0 4px 12px rgba(0, 0, 255, 0.3); }
-    .program:nth-child(5) { box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3); }
-    .program:nth-child(6) { box-shadow: 0 4px 12px rgba(128, 0, 128, 0.3); }
-    .program:nth-child(7) { box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3); }
-    .program:nth-child(8) { box-shadow: 0 4px 12px rgba(255, 20, 147, 0.3); }
-    .program:nth-child(9) { box-shadow: 0 4px 12px rgba(105, 105, 105, 0.3); }
-    .program:nth-child(10) { box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3); }
-    .program:nth-child(11) { box-shadow: 0 4px 12px rgba(70, 130, 180, 0.3); }
-
-    .program-title {
-      font-size: 1.4em;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: #222;
-      text-align: center;
-    }
-    .buttons {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ffffff;
       display: flex;
       justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      align-items: center;
+      height: 100vh;
+      color: #333;
     }
-    .btn {
-      background-color: #e60000;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      min-width: 120px;
-      text-decoration: none;
+
+    .container {
+      background: #f9f9f9;
+      border-radius: 20px;
+      padding: 40px;
       text-align: center;
-      transition: background-color 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      max-width: 90%;
     }
-    .btn:hover {
-      background-color: #c40000;
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
     }
-    .copied-msg {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #28a745;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 6px;
-      font-size: 0.9em;
-      display: none;
-      z-index: 10;
+
+    .download-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      color: #fff;
+      background-color: #ff6f61;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-bottom: 30px;
     }
-    @media (max-width: 400px) {
-      .buttons {
-        flex-direction: column;
-        align-items: center;
-      }
+
+    .download-btn:hover {
+      background-color: #ff3b2e;
+      transform: scale(1.05);
+    }
+
+    .direct-link {
+      display: block;
+      font-size: 1.5em;
+      color: #3366cc;
+      text-decoration: none;
+      word-wrap: break-word;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .direct-link:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>МОИ ПРОГРАММЫ</h1>
-
-  <!-- Программы -->
-  <div class="program">
-    <div class="program-title">1. HDRezka</div>
-    <div class="buttons">
-      <a class="btn" href="https://progi24.netlify.app/hdrezka.apk" download>Скачать</a>
-      <button class="btn copy-btn" data-link="https://progi24.netlify.app/hdrezka.apk">Копировать</button>
-    </div>
-    <div class="copied-msg">Скопировано!</div>
-  </div>
-
-  <div class="program">
-    <div class="program-title">2. IPTV Pro</div>
-    <div class="buttons">
-      <a class="btn" href="https://progi24.netlify.app/iptvpro.apk" download>Скачать</a>
-      <button class="btn copy-btn" data-link="https://progi24.netlify.app/iptvpro.apk">Копировать</button>
-    </div>
-    <div class="copied-msg">Скопировано!</div>
-  </div>
-
-  <div class="program">
-    <div class="program-title">3. LazyMedia Deluxe</div>
-    <div class="buttons">
-      <a class="btn" href="https://progi24.netlify.app/lazymedia.apk" download>Скачать</a>
-      <button class="btn copy-btn" data-link="https://progi24.netlify.app/lazymedia.apk">Копировать</button>
-    </div>
-    <div class="copied-msg">Скопировано!</div>
-  </div>
-
-  <div class="program">
-    <div class="program-title">4. MX Player</div>
-    <div class="buttons">
-      <a class="btn" href="https://progi24.netlify.app/mxplayer.apk" download>Скачать</a>
-      <button class="btn copy-btn" data-link="https://progi24.netlify.app/mxplayer.apk">Копировать</button>
-    </div>
-    <div class="copied-msg">Скопировано!</div>
-  </div>
-
-  <div class="program">
-    <div class="program-title">5. VLC Mobile</div>
-    <div class="buttons">
-      <a class="btn" href="https://progi24.netlify.app/vlc.apk" download>Скачать</a>
-      <button class="btn copy-btn" data-link="https://progi24.netlify.app/vlc.apk">Копировать</button>
-    </div>
-    <div class="copied-msg">Скопировано!</div>
-  </div>
-
-  <div class="program">
-    <div class="program-title">6. KinoPub</div>
-    <div class="buttons">
-      <a class="btn" href="https://progi24.netlify.app/kinopub.apk" download>Скачать</a>
-      <button class="btn copy-btn" data-link="https://progi24.netlify.app/kinopub.apk">Копировать</button>
-    </div>
-    <div class="copied-msg">Скопировано!</div>
-  </div>
-
-  <div class="program">
-    <div class="program-title">7. SeasonHit</div>
-    <div class="buttons">
-      <a class="btn" href="https://progi24.netlify.app/seasonhit.apk" download>Скачать</a>
-      <button class="btn copy-btn" data-link="https://progi24.netlify.app/seasonhit.apk">Копировать</button>
-    </div>
-    <div class="copied-msg">Скопировано!</div>
-  </div>
-
-  <div class="program">
-    <div class="program-title">8. NUM</div>
-    <div class="buttons">
-      <a class="btn" href="https://progi24.netlify.app/num.apk" download>Скачать</a>
-      <button class="btn copy-btn" data-link="https://progi24.netlify.app/num.apk">Копировать</button>
-    </div>
-    <div class="copied-msg">Скопировано!</div>
-  </div>
-
-  <div class="program">
-    <div class="program-title">9. AniLab</div>
-    <div class="buttons">
-      <a class="btn" href="https://progi24.netlify.app/anilab.apk" download>Скачать</a>
-      <button class="btn copy-btn" data-link="https://progi24.netlify.app/anilab.apk">Копировать</button>
-    </div>
-    <div class="copied-msg">Скопировано!</div>
-  </div>
-
-  <div class="program">
-    <div class="program-title">10. MediaStation X</div>
-    <div class="buttons">
-      <a class="btn" href="https://progi24.netlify.app/mediastation.apk" download>Скачать</a>
-      <button class="btn copy-btn" data-link="https://progi24.netlify.app/mediastation.apk">Копировать</button>
-    </div>
-    <div class="copied-msg">Скопировано!</div>
+  <div class="container">
+    <h1>Ваш файл MOE.m3u готов</h1>
+    <a class="download-btn" href="https://moeiptv.netlify.app/moe.m3u" onclick="downloadFile(); return false;">📥 Скачать MOE.m3u</a>
+    <a class="direct-link" onclick="downloadFile()">https://moeiptv.netlify.app/moe.m3u</a>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll(".copy-btn").forEach(button => {
-        button.addEventListener("click", () => {
-          const link = button.getAttribute("data-link");
-          const container = button.closest(".program");
-          const msg = container.querySelector(".copied-msg");
-
-          navigator.clipboard.writeText(link).then(() => {
-            msg.style.display = 'block';
-            setTimeout(() => msg.style.display = 'none', 2000);
-          }).catch(err => {
-            console.error('Ошибка копирования:', err);
-            alert("Не удалось скопировать ссылку. Убедитесь, что открываете сайт не с file://");
-          });
-        });
-      });
-    });
+    function downloadFile() {
+      const link = document.createElement('a');
+      link.href = 'https://moeiptv.netlify.app/moe.m3u';
+      link.download = 'MOE.m3u';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   </script>
 </body>
 </html>
