@@ -201,6 +201,9 @@
         }
         .client-info p {
             margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .client-info strong {
             font-weight: 600;
@@ -227,6 +230,11 @@
             cursor: pointer;
             font-size: 14px;
             flex-shrink: 0;
+            text-align: center;
+        }
+        .icon {
+            font-size: 20px;
+            width: 24px;
             text-align: center;
         }
     </style>
@@ -490,7 +498,7 @@
             const phone = client.phone;
             const links = [
                 `https://is.gd/${phone}`,
-                `https://rebrang.ly/${phone}`,
+                `https://rebrand.ly/${phone}`,
                 `https://moe-iptv.vercel.app/${phone}.m3u`
             ];
             
@@ -505,12 +513,12 @@
             });
             
             document.getElementById('clientInfoContent').innerHTML = `
-                <p><strong>Имя:</strong> ${client.name || 'Не указано'}</p>
-                <p><strong>Телефон:</strong> ${client.phone}</p>
-                <p><strong>Ключ доступа:</strong> ${client.key}</p>
-                <p><strong>Дата оплаты:</strong> ${formatDate(client.paymentDate)}</p>
-                <p><strong>${daysLeftText}</strong></p>
-                <p><strong>Ссылки:</strong></p>
+                <p><span class="icon">👤</span><strong>${client.name || 'Не указано'}</strong></p>
+                <p><span class="icon">📱</span>${client.phone}</p>
+                <p><span class="icon">🔑</span>${client.key}</p>
+                <p><span class="icon">💰</span>${formatDate(client.paymentDate)}</p>
+                <p><span class="icon">⏳</span><strong>${daysLeftText}</strong></p>
+                <p><span class="icon">🔗</span><strong>Ссылки:</strong></p>
                 ${linksHTML}
             `;
             openModal('clientInfoModal');
