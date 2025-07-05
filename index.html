@@ -474,9 +474,7 @@
 
         function copyToClipboard(text, event) {
             event.preventDefault();
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Ссылка скопирована в буфер обмена');
-            }).catch(err => {
+            navigator.clipboard.writeText(text).catch(err => {
                 console.error('Ошибка копирования: ', err);
             });
             return false;
