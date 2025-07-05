@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IPTV Manager</title>
+    <link rel="icon" href="https://moe-iptv.vercel.app/iptv_icon.ico" type="image/x-icon">
     <style>
         :root {
             --system-blue: #007AFF;
@@ -225,12 +226,16 @@
             color: white;
             border: none;
             border-radius: 4px;
-            padding: 5px 0;
-            width: 80px;
+            padding: 5px;
+            width: 32px;
+            height: 32px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;
             flex-shrink: 0;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .icon {
             font-size: 20px;
@@ -507,7 +512,7 @@
                 linksHTML += `
                     <div class="link-container">
                         <a href="${link}" class="link" target="_blank">${link}</a>
-                        <button class="copy-btn" onclick="copyToClipboard('${link}', event)">Копировать</button>
+                        <button class="copy-btn" onclick="copyToClipboard('${link}', event)" title="Копировать">📋</button>
                     </div>
                 `;
             });
