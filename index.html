@@ -232,7 +232,6 @@
     </style>
 </head>
 <body>
-    <!-- Весь HTML остается без изменений -->
     <div class="container">
         <div class="header">
             <h1>IPTV Manager</h1>
@@ -517,6 +516,27 @@
             openModal('clientInfoModal');
         }
 
+        async function getFileSha(filename) {
+            try {
+                const apiUrl = `https://api.github.com/repos/${REPO_CONFIG.owner}/${REPO_CONFIG.repo}/contents/${filename}`;
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${getGitHubToken()}`,
+                        'Accept': 'application/vnd.github+json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.sha;
+                }
+                return null;
+            } catch (error) {
+                console.error('Ошибка при получении SHA файла:', error);
+                return null;
+            }
+        }
+
         function createPlaylist(phone, key) {
             return new Promise(async (resolve, reject) => {
                 try {
@@ -531,6 +551,9 @@
                     let content = await response.text();
                     content = content.replace(/\/iptv\/\w+\//g, `/iptv/${key}/`);
                     
+                    // Получаем SHA существующего файла, если он есть
+                    const sha = await getFileSha(filename);
+                    
                     const apiUrl = `https://api.github.com/repos/${REPO_CONFIG.owner}/${REPO_CONFIG.repo}/contents/${filename}`;
                     const uploadResponse = await fetch(apiUrl, {
                         method: 'PUT',
@@ -542,7 +565,8 @@
                         body: JSON.stringify({
                             message: `Добавлен плейлист: ${cleanPhone}`,
                             content: btoa(unescape(encodeURIComponent(content))),
-                            branch: REPO_CONFIG.branch
+                            branch: REPO_CONFIG.branch,
+                            sha: sha // Добавляем SHA, если файл существует
                         })
                     });
                     
