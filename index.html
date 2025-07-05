@@ -24,9 +24,6 @@
             background-color: var(--system-gray-light);
             color: #1C1C1E;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
         }
         .container {
@@ -37,6 +34,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             overflow: hidden;
             padding: 20px;
+            margin: 20px auto 0;
         }
         .header {
             margin-bottom: 20px;
@@ -82,6 +80,19 @@
             background: white;
             color: var(--system-orange);
             border: 1px solid var(--system-orange);
+        }
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #D1D1D6;
+            border-radius: 8px;
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--system-blue);
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
         }
         .client-card {
             background: white;
@@ -253,6 +264,7 @@
         <div class="buttons">
             <button id="newClientBtn">Новый клиент</button>
             <button id="channelListBtn" class="secondary">Список каналов</button>
+            <input type="text" id="searchInput" class="search-input" placeholder="Поиск по номеру телефона...">
         </div>
         
         <div id="clientsList">
@@ -464,11 +476,25 @@
             localStorage.setItem('iptv_clients', JSON.stringify(clients));
         }
 
-        function renderClients() {
+        function filterClients(searchText) {
+            if (!searchText) return clients;
+            
+            const searchDigits = searchText.replace(/\D/g, '');
+            if (searchDigits.length === 0) return clients;
+            
+            return clients.filter(client => {
+                const clientPhoneDigits = client.phone.replace(/\D/g, '');
+                return clientPhoneDigits.includes(searchDigits);
+            });
+        }
+
+        function renderClients(clientsToRender = null) {
             const clientsList = document.getElementById('clientsList');
             clientsList.innerHTML = '';
             
-            clients.forEach((client, index) => {
+            const clientsData = clientsToRender || clients;
+            
+            clientsData.forEach((client, index) => {
                 const daysLeft = calculateDaysLeft(client.paymentDate, client.months);
                 const daysLeftClass = daysLeft >= 0 ? 'positive' : 'negative';
                 const daysLeftText = daysLeft >= 0 ? `${daysLeft} дн.` : `Просрочено ${Math.abs(daysLeft)} дн.`;
@@ -481,7 +507,7 @@
                     <div class="days-left ${daysLeftClass}">${daysLeftText}</div>
                 `;
                 card.onclick = () => {
-                    currentClientId = index;
+                    currentClientId = clients.findIndex(c => c.phone === client.phone);
                     showClientInfo(client);
                 };
                 clientsList.appendChild(card);
@@ -613,6 +639,13 @@
             // Кнопка "Список каналов"
             document.getElementById('channelListBtn').addEventListener('click', () => {
                 window.location.href = 'https://iptv-spisok.vercel.app/';
+            });
+            
+            // Поле поиска
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                const searchText = e.target.value;
+                const filteredClients = filterClients(searchText);
+                renderClients(filteredClients);
             });
             
             // Кнопка "Отмена" в модалке нового клиента
