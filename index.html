@@ -233,13 +233,9 @@
             word-break: break-all;
         }
         .copy-btn {
-            background: var(--system-blue);
-            color: white;
+            background: transparent;
+            color: var(--system-blue);
             border: none;
-            border-radius: 4px;
-            padding: 5px;
-            width: 32px;
-            height: 32px;
             cursor: pointer;
             font-size: 16px;
             flex-shrink: 0;
@@ -247,11 +243,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 0;
+            width: 24px;
+            height: 24px;
         }
         .icon {
-            font-size: 20px;
             width: 24px;
-            text-align: center;
+            height: 24px;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -538,18 +537,20 @@
                 linksHTML += `
                     <div class="link-container">
                         <a href="${link}" class="link" target="_blank">${link}</a>
-                        <button class="copy-btn" onclick="copyToClipboard('${link}', event)" title="Копировать">📋</button>
+                        <button class="copy-btn" onclick="copyToClipboard('${link}', event)" title="Копировать">
+                            <img src="https://moe-iptv.vercel.app/copy.png" alt="Копировать" class="icon">
+                        </button>
                     </div>
                 `;
             });
             
             document.getElementById('clientInfoContent').innerHTML = `
-                <p><span class="icon">👤</span><strong>${client.name || 'Не указано'}</strong></p>
-                <p><span class="icon">📱</span>${client.phone}</p>
-                <p><span class="icon">🔑</span>${client.key}</p>
-                <p><span class="icon">💰</span>${formatDate(client.paymentDate)}</p>
-                <p><span class="icon">⏳</span><strong>${daysLeftText}</strong></p>
-                <p><span class="icon">🔗</span><strong>Ссылки:</strong></p>
+                <p><img src="https://moe-iptv.vercel.app/user.png" alt="Имя" class="icon"><strong>${client.name || 'Не указано'}</strong></p>
+                <p><img src="https://moe-iptv.vercel.app/call.png" alt="Телефон" class="icon">${client.phone}</p>
+                <p><img src="https://moe-iptv.vercel.app/key.png" alt="Ключ" class="icon">${client.key}</p>
+                <p><img src="https://moe-iptv.vercel.app/date.png" alt="Дата" class="icon">${formatDate(client.paymentDate)}</p>
+                <p><img src="https://moe-iptv.vercel.app/mail.png" alt="Срок" class="icon"><strong>${daysLeftText}</strong></p>
+                <p><img src="https://moe-iptv.vercel.app/link.png" alt="Ссылки" class="icon"><strong>Ссылки:</strong></p>
                 ${linksHTML}
             `;
             openModal('clientInfoModal');
